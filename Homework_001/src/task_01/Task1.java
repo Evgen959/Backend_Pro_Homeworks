@@ -15,8 +15,7 @@ public class Task1 {
 
         for (int i = 1; i < 2_000_000; i++) {
 
-            int x = i/21;
-            if (((i%21) == 0) && (String.valueOf(x).contains("3"))) {
+            if (((i%21) == 0) && (String.valueOf(i).contains("3"))) {
                 int i1 = counter++;
             }
         }
