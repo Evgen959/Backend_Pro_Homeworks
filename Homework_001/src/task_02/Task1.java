@@ -7,19 +7,36 @@
 // Сравнить результаты двух решений - они должны совпадать.
 
 
-package task_01;
+package task_02;
 
 public class Task1 {
-    public static void main(String[] args) {
-        int counter = 0;
 
-        for (int i = 1; i < 2_000_000; i++) {
+    static int counter = 0;
+
+    public static void main(String[] args) {
+
+        MyThread myThread = new MyThread();
+
+        myThread.start();
+
+        for (int i = 1; i < 1_000_000; i++) {
 
             int x = i/21;
             if (((i%21) == 0) && (String.valueOf(x).contains("3"))) {
-                int i1 = counter++;
+                incrementCounter();
             }
         }
+
+        try {
+            myThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         System.out.println(counter);
+    }
+
+    public static synchronized void incrementCounter() {
+        counter++;
     }
 }
