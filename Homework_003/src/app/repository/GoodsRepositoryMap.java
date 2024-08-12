@@ -1,6 +1,8 @@
 package app.repository;
 
 import app.domain.Goods;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -8,10 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
+@PropertySource("classpath:application.properties")
 public class GoodsRepositoryMap implements GoodsRepository{
-    private Map<Long, Goods> database = new HashMap<>();
+    private final Map<Long, Goods> database;
 
-    public GoodsRepositoryMap() {
+    public GoodsRepositoryMap(@Value() Map<Long, Goods> database) {
+        this.database = database;
         initData();
     }
 
